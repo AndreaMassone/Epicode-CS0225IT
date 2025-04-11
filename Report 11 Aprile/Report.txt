@@ -1,0 +1,79 @@
+Oggi vedremo un codice in python che presenta alcuni errori di sintassi e di "intuitività"
+Il codice in questione è il seguente
+						import datetime 
+						def assistente_virtuale(comando):
+						    if comando == "Qual è la data di oggi?":
+			       [ 1 ERRORE]           	# Il modulo datetime.datetoday non esiste.
+							# La correzione dobrebbe essere : datetime.date.today()
+							oggi = datetime.datetoday()
+							risposta = "La data di oggi è " + oggi.strftime("%d/%m/%Y")
+						    elif comando == "Che ore sono?":
+							ora_attuale = datetime.datetime.now().time()
+							risposta = "L ora attuale è" + ora_attuale.strftime("%H:%M")
+						    elif comando == "Come ti chiami?":
+							risposta = "Mi chiamo Assistente Virtuale"   
+						    else:
+							risposta = "Non ho capito la tua domanda?"
+							return risposta   
+			       [2 ERRORE]       #Dopo il Treu mancano i due punti :                                                
+						while True 
+						    comando_utente = input("Cosa vuoi sapere?")
+						    if comando_utente.lower() == "esci" :
+						      print("Arrivederci!")
+						      break
+						    else:
+						       print(assistente_virtuale(comando_utente))
+
+Come potete vedere ho già aggiunto dei commenti che spiegano in maniera rapida cos'è sbagliato nel codice.
+Ma andiamo ad analizzarli meglio
+ERRORE Num 1 : La sintassi del modulo datetime.datetoday() è errata, la forma corretta è datetime.date.today()
+ERRORE Num 2 : La mancanza dei due punti (:) di fronte al "while True". Questa mancanza fa in modo il ciclo non inzi proprio
+ERRORE Num 3 : In questo caso non si parla di un vero e proprio errore nel codice, ma di mancanza di "praticità" in esso.
+
+Infatti il codice in questione, non spiega all'utente cosa sa fare e quali sono le sue funzioni. Per renderlo piu "User Friendly" andiamo ad aggiungere: 
+1 Un modulo che ci faranno comodo
+2 Un'altra funzione 
+3 Delle spiegazioni in piu.
+
+Di seguito il codice corretto 
+
+					import datetime 
+
+					def assistente_virtuale(comando):
+		 [CORREZIONE 1]        	    comando = comando.lower()
+
+					    if comando == "qual è la data di oggi?":
+						oggi = datetime.date.today()
+						risposta = "la data di oggi è " + oggi.strftime("%d/%m/%Y")
+					    elif comando == "che ore sono?":
+						ora_attuale = datetime.datetime.now().time()
+						risposta = "l ora attuale è " + ora_attuale.strftime("%H:%M")
+					    elif comando == "Come ti chiami?":
+						risposta = "Mi chiamo Assistente Virtuale"   
+					    else:
+						risposta = "Non ho capito la tua domanda"
+					    return risposta  
+
+		[CORREZIONE 2]		def opzioni():
+					  print("Scegli uno delle opzioni disponibili")  
+					  print("Qual è la data di oggi")  
+					  print("Qual è l'ora attuale") 
+					  print("Puoi chidere il mio nome")
+
+		[CORREZIONE 3]		print("Ciao sono il programma Assistente Virtuale\nCosa vuoi sapere?")
+		[CORREZIONE 2]		opzioni()
+					while True :
+		[CORREZIONE 3]	            comando_utente = input("Se hai gia tutte le tue risposte digita esci\n")
+					    if comando_utente.lower() == "esci" :
+					       print("Arrivederci!")
+					       break
+					    else:
+					       print(assistente_virtuale(comando_utente))
+					       
+					       
+CORREZIONE 1 : Andiamo ad aggiungere a "comando" la possibilita di essere recepito dal programma a prescindere dall'uso delle maiuscole.
+CORREZIONE 2 : Andiamo ad aggiungere una seconda funzione che stampi la lista di opzioni usufruibili dall'utente a inizio programma
+CORREZIONE 3 : Andiamo a rendere piu esplicativo il programma e mostriamo come uscire da esso
+
+Ora il programma è corretto nella sitassi e nella spiegazione delle sue funzione.
+Andrea Massone					       
